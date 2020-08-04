@@ -14,10 +14,11 @@ class Input extends React.Component {
         let inputValue = document.getElementById('inputNumber').value;
         if (inputValue === '') {
             alert("输入不能为空");
+            return;
         }
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
-        console.log(this.props.values)
+        // console.log(this.props.values)
     }
 
 
@@ -29,14 +30,19 @@ class Input extends React.Component {
                     <button onClick={this.add}>add</button>
                 </div>
                 {
-                    this.props.values.map((item, index) => <List 
-                    key={index} 
-                    index={index} 
-                    item={item}
-                    deleteList={this.props.deleteList} 
-                    onMark={this.props.onMark}
-                    unMark={this.props.unMark}
-                    />)
+                    this.props.values.map((item, index) => {
+                        console.log(item)
+                    if (!item.status) {
+                        return <List 
+                        key={index} 
+                        index={index} 
+                        item={item}
+                        deleteList={this.props.deleteList} 
+                        onMark={this.props.onMark}
+                        unMark={this.props.unMark}
+                        />
+                    }
+                    })
                 }
             </>
         )

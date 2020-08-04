@@ -10,16 +10,14 @@ class List extends React.Component{
     }
 
     handleMark = () =>{
-        if(this.props.item.status == false){
+        // console.log(this.props.item)
+        if(!this.props.item.status){
             this.props.onMark(this.props.index);
         }else{
             this.props.unMark(this.props.index);
         }
-        
-        console.log(this.props.item.status)
     }
     render(){
-        // let style={ textDecorationLine: item.status ? 'line-through' : 'none' }
         return(
             <div>
                 <label onClick={this.handleMark} style={{ textDecorationLine:  this.props.item.status ? 'line-through' : 'none' }}>{this.props.item.value}</label>

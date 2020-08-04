@@ -9,24 +9,24 @@ export default (state = init, action) => {
             }
         case 'deleteList':
             return {
-                values: state.values.filter((param, index) => { return index != action.index })
+                values: state.values.filter((param, index) => { return index !== action.index })
             }
         case 'onMark':
             return {
                 values: state.values.map((item, index) => {
-                    if (index == action.index) {
+                    if (index === action.index) {
                         item.status = true;
-                        return item;
                     }
+                    return item;
                 })
             }
         case 'unMark':
             return {
                 values: state.values.map((item, index) => {
-                    if (index == action.index) {
+                    if (index === action.index) {
                         item.status = false;
-                        return item;
                     }
+                    return item;
                 })
             }
         default:
