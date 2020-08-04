@@ -5,22 +5,24 @@ import { connect } from 'react-redux'
 class Input extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            inputValue : ''
+        }
     }
 
     add = () => {
         let inputValue = document.getElementById('inputNumber').value;
-        if (inputValue == '') {
-            return;
+        if (inputValue === '') {
+            alert("输入不能为空");
         }
+        console.log(inputValue)
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
+
     }
 
 
     render() {
-
-        const initArray = [...Array(this.props.listSize).keys()]
-
         return (
             <>
                 <div>
@@ -28,7 +30,7 @@ class Input extends React.Component {
                     <button onClick={this.add}>add</button>
                 </div>
                 {
-                    initArray.map(key => <List key={key} value={this.props.inputValue} deleteList={this.props.deleteList} />)
+                    this.props.values.map((item,index) => <List key={index} index={index} value={item} deleteList={this.props.deleteList} />)
                 }
             </>
         )
@@ -38,14 +40,14 @@ class Input extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { listSize, inputValue } = state
-    return { listSize, inputValue }
+    const { values } = state
+    return { values : values }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-    addList: (value) => dispatch({ type: 'addList', payload: value }),
-    deleteList: () => dispatch({ type: 'deleteList' })
+    addList: (value) => dispatch({ type: 'addList', value : value }),
+    deleteList: (index) => dispatch({ type: 'deleteList', index : index})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);

@@ -1,16 +1,15 @@
 const init = {
-    listSize: 0,
-    inputValue: ''
+    values: []
 }
 export default (state = init, action) => {
     switch (action.type) {
         case 'addList':
-            return { 
-                listSize: state.listSize + 1, inputValue: action.payload 
+            return {
+                values: [...state.values, action.value]
             }
         case 'deleteList':
             return {
-                listSize : state.listSize - 1
+                values: state.values.filter((param,index) => { return index != action.index} )
             }
         default:
             return state;

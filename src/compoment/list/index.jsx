@@ -2,18 +2,15 @@ import React from 'react'
 class List extends React.Component{
     constructor(props){
         super(props)
-        this.state = {
-            value : this.props.value
-        }
     }
 
     handleDelete = () =>{
-        this.props.deleteList()
+        this.props.deleteList(this.props.index);
     }
     render(){
         return(
             <div>
-                <label>{this.state.value}</label>
+                <label>{this.props.value}</label>
                 <button onClick={this.handleDelete}>X</button>
             </div>
         )
