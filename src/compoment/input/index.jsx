@@ -6,7 +6,7 @@ class Input extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            inputValue : ''
+            inputValue: ''
         }
     }
 
@@ -15,10 +15,9 @@ class Input extends React.Component {
         if (inputValue === '') {
             alert("输入不能为空");
         }
-        console.log(inputValue)
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
-
+        console.log(this.props.values)
     }
 
 
@@ -30,7 +29,14 @@ class Input extends React.Component {
                     <button onClick={this.add}>add</button>
                 </div>
                 {
-                    this.props.values.map((item,index) => <List key={index} index={index} value={item} deleteList={this.props.deleteList} />)
+                    this.props.values.map((item, index) => <List 
+                    key={index} 
+                    index={index} 
+                    item={item}
+                    deleteList={this.props.deleteList} 
+                    onMark={this.props.onMark}
+                    unMark={this.props.unMark}
+                    />)
                 }
             </>
         )
@@ -41,13 +47,15 @@ class Input extends React.Component {
 
 const mapStateToProps = state => {
     const { values } = state
-    return { values : values }
+    return { values: values }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-    addList: (value) => dispatch({ type: 'addList', value : value }),
-    deleteList: (index) => dispatch({ type: 'deleteList', index : index})
+    addList: (value) => dispatch({ type: 'addList', value: value }),
+    deleteList: (index) => dispatch({ type: 'deleteList', index: index }),
+    onMark: (index) => dispatch({ type: 'onMark', index: index }),
+    unMark: (index) => dispatch({ type: 'unMark', index: index })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
