@@ -9,6 +9,9 @@ class Input extends React.Component {
 
     add = () => {
         let inputValue = document.getElementById('inputNumber').value;
+        if(inputValue == ''){
+            return;
+        }
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
     }
