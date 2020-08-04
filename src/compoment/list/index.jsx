@@ -6,11 +6,15 @@ class List extends React.Component{
             value : this.props.value
         }
     }
+
+    handleDelete = () =>{
+        this.props.deleteList()
+    }
     render(){
         return(
             <div>
                 <label>{this.state.value}</label>
-                <button>X</button>
+                <button onClick={this.handleDelete}>X</button>
             </div>
         )
     }

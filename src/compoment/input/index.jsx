@@ -9,12 +9,14 @@ class Input extends React.Component {
 
     add = () => {
         let inputValue = document.getElementById('inputNumber').value;
-        if(inputValue == ''){
+        if (inputValue == '') {
             return;
         }
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
     }
+
+
     render() {
 
         const initArray = [...Array(this.props.listSize).keys()]
@@ -26,7 +28,7 @@ class Input extends React.Component {
                     <button onClick={this.add}>add</button>
                 </div>
                 {
-                    initArray.map(key => <List key={key} value={this.props.inputValue}/>)
+                    initArray.map(key => <List key={key} value={this.props.inputValue} deleteList={this.props.deleteList} />)
                 }
             </>
         )
@@ -36,13 +38,14 @@ class Input extends React.Component {
 }
 
 const mapStateToProps = state => {
-    const { listSize , inputValue} = state
-    return { listSize  , inputValue}
+    const { listSize, inputValue } = state
+    return { listSize, inputValue }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-    addList : (value) => dispatch({type: 'addList',payload : value})
+    addList: (value) => dispatch({ type: 'addList', payload: value }),
+    deleteList: () => dispatch({ type: 'deleteList' })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
