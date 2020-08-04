@@ -10,7 +10,7 @@ class List extends React.Component{
     }
 
     handleMark = () =>{
-        // console.log(this.props.item)
+        console.log(this.props.item)
         if(!this.props.item.status){
             this.props.onMark(this.props.index);
         }else{
@@ -20,7 +20,7 @@ class List extends React.Component{
     render(){
         return(
             <div>
-                <label onClick={this.handleMark} style={{ textDecorationLine:  this.props.item.status ? 'line-through' : 'none' }}>{this.props.item.value}</label>
+                <label onClick={this.handleMark} style={{ textDecorationLine:  this.props.item.status ? 'line-through' : 'none' }}>{this.props.item.content}</label>
                 <button onClick={this.handleDelete}>X</button>
             </div>
         )

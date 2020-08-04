@@ -1,6 +1,7 @@
 import React from 'react'
 import List from '../list';
 import { connect } from 'react-redux'
+import Axios from 'axios';
 
 class Input extends React.Component {
     constructor(props) {
@@ -22,6 +23,17 @@ class Input extends React.Component {
     }
 
 
+    componentDidMount(){
+        const _this = this;
+        Axios.get('https://5e9ec500fb467500166c4658.mockapi.io/todos')
+        .then(function(response){
+            _this.props.addInitData(response.data);
+        }).catch(function(error) {
+            alert(error)
+        })
+    }
+
+
     render() {
         return (
             <>
@@ -31,7 +43,6 @@ class Input extends React.Component {
                 </div>
                 {
                     this.props.values.map((item, index) => {
-                        console.log(item)
                     if (!item.status) {
                         return <List 
                         key={index} 
@@ -61,7 +72,8 @@ const mapDispatchToProps = dispatch => ({
     addList: (value) => dispatch({ type: 'addList', value: value }),
     deleteList: (index) => dispatch({ type: 'deleteList', index: index }),
     onMark: (index) => dispatch({ type: 'onMark', index: index }),
-    unMark: (index) => dispatch({ type: 'unMark', index: index })
+    unMark: (index) => dispatch({ type: 'unMark', index: index }),
+    addInitData: (data) => dispatch({ type: 'addInitData', data: data })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Input);
