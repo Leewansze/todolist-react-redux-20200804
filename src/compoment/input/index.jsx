@@ -17,20 +17,25 @@ class Input extends React.Component {
             alert("输入不能为空");
             return;
         }
+        Axios.post('https://5e9ec500fb467500166c4658.mockapi.io/todos', { content: inputValue, status: false })
+            .then(function (response) {
+                console.log(response);
+            })
+
         this.props.addList(inputValue);
         document.getElementById('inputNumber').value = '';
         // console.log(this.props.values)
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         const _this = this;
         Axios.get('https://5e9ec500fb467500166c4658.mockapi.io/todos')
-        .then(function(response){
-            _this.props.addInitData(response.data);
-        }).catch(function(error) {
-            alert(error)
-        })
+            .then(function (response) {
+                _this.props.addInitData(response.data);
+            }).catch(function (error) {
+                alert(error)
+            })
     }
 
 
@@ -43,16 +48,16 @@ class Input extends React.Component {
                 </div>
                 {
                     this.props.values.map((item, index) => {
-                    if (!item.status) {
-                        return <List 
-                        key={index} 
-                        index={index} 
-                        item={item}
-                        deleteList={this.props.deleteList} 
-                        onMark={this.props.onMark}
-                        unMark={this.props.unMark}
-                        />
-                    }
+                        if (!item.status) {
+                            return <List
+                                key={index}
+                                index={index}
+                                item={item}
+                                deleteList={this.props.deleteList}
+                                onMark={this.props.onMark}
+                                unMark={this.props.unMark}
+                            />
+                        }
                     })
                 }
             </>

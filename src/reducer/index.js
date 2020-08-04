@@ -5,7 +5,7 @@ export default (state = init, action) => {
     switch (action.type) {
         case 'addList':
             return {
-                values: [...state.values, { content: action.value, status: false }]
+                values: [...state.values, {content: action.value, status: false }]
             }
         case 'deleteList':
             return {
