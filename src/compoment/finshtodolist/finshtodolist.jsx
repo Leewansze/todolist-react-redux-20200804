@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import List from '../list/index'
+import Listitem from '../list/index'
+import { List, Row, Col , Button} from 'antd';
 
 class Finshtodolist extends React.Component {
     constructor(props) {
@@ -10,34 +11,45 @@ class Finshtodolist extends React.Component {
     render() {
         return (
             <>
-                <h1>Finish Todo List</h1>
-                <div>
-                    {
-                        this.props.values.map((item, index) => {
-                            if (item.status) {
-                                return <List key={index} item={item}
-                                index = {index}
-                                onMark={this.props.onMark}
-                                unMark={this.props.unMark}/>
-                            }
-                        })
-                    }
-                </div>
+                <Row>
+                    <Col span={12} offset={6}>
+                        <h1>Finish Todo List</h1>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={12} offset={6}>
+                        <div>
+                            <List
+                                bordered
+                                dataSource={this.props.values}
+                                renderItem={(item, index) => (
+                                    <List.Item actions={[<Button onClick={this.handleDelete} type="primary">Delete</Button>]}>
+                                        <Listitem
+                                            key={index}
+                                            index={index}
+                                            item={item}
+                                            deleteList={this.props.deleteList}
+                                            toggleMark={this.props.toggleMark}
+                                        />
+                                    </List.Item>
+                                )}
+                            />
+                        </div>
+                    </Col>
+                </Row>
             </>
         )
     }
 }
 
 
-
+//TODO
 const mapStateToProps = state => {
-    const { values } = state
-    return { values }
+    const { values } = state.todoReducer
+    return { values : values.filter((param) => { return param.status})}
 }
 
 const mapDispatchToProps = dispatch => ({
-    onMark: (index) => dispatch({ type: 'onMark', index: index }),
-    unMark: (index) => dispatch({ type: 'unMark', index: index })
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Finshtodolist);
+export default connect(mapStateToProps, mapDispatchToProps)(Finshtodolist);

@@ -1,6 +1,8 @@
-import { createStore } from 'redux'
-import reducer from './index'
+import { createStore, combineReducers } from 'redux'
+import todoReducer from './todoReducer'
+import loadingReducer from './loading'
 
-let store = createStore(reducer)
+
+let store = createStore(combineReducers({todoReducer, loadingReducer}))
 
 export default store;
