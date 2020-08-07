@@ -12,7 +12,7 @@ class Listitem extends React.Component {
             .then((response) => {
                 this.props.deleteList(this.props.item.id);
             });
-        
+
     }
 
     handleMark = () => {
@@ -20,15 +20,15 @@ class Listitem extends React.Component {
             .then((response) => {
                 this.props.toggleMark(this.props.item.id);
             })
-        
+
     }
     render() {
         return (
-            <div>
+            <Col span={24}>
                 <label onClick={this.handleMark}
                     style={{ textDecorationLine: this.props.item.status ? 'line-through' : 'none' }}>{this.props.item.content}</label>
-                <Button onClick={this.handleDelete} type="primary">Delete</Button>
-            </div>
+                <Button onClick={this.handleDelete} style={{float : 'right'}} type="primary">Delete</Button>
+            </Col>
         )
     }
 }

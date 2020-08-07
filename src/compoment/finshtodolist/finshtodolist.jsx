@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Listitem from '../list/index'
-import { List, Row, Col , Button} from 'antd';
+import { List, Row, Col, Button } from 'antd';
 
 class Finshtodolist extends React.Component {
     constructor(props) {
@@ -46,10 +46,12 @@ class Finshtodolist extends React.Component {
 //TODO
 const mapStateToProps = state => {
     const { values } = state.todoReducer
-    return { values : values.filter((param) => { return param.status})}
+    return { values: values.filter((param) => { return param.status }) }
 }
 
 const mapDispatchToProps = dispatch => ({
+    toggleMark: (id) => dispatch({ type: 'toggleMark', id: id }),
+    deleteList: (id) => dispatch({ type: 'deleteList', id: id })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Finshtodolist);
