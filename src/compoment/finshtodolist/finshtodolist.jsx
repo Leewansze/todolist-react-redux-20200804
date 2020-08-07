@@ -23,7 +23,7 @@ class Finshtodolist extends React.Component {
                                 bordered
                                 dataSource={this.props.values}
                                 renderItem={(item, index) => (
-                                    <List.Item actions={[<Button onClick={this.handleDelete} type="primary">Delete</Button>]}>
+                                    <List.Item>
                                         <Listitem
                                             key={index}
                                             index={index}

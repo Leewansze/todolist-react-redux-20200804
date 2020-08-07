@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from '../reducer/store';
 
 const todoApi = axios.create({
-    baseURL: `https://5e9ec500fb467500166c4658.mockapi.io/todos`
+    baseURL: `http://localhost:8080/todos`
 });
 
 todoApi.interceptors.request.use(req => {
@@ -12,7 +12,6 @@ todoApi.interceptors.request.use(req => {
 );
 
 todoApi.interceptors.response.use(req => {
-    console.log("1")
     store.dispatch({ type: "LOADING_TOGGLE", payload: { loading: false } });
     console.log(req)
     return req;

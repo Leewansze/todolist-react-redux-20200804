@@ -29,23 +29,19 @@ class InputTodolist extends React.Component {
         todoApi.post('', {
             content: this.state.inputValue,
             status: false
-        })
-            .then(function (response) {
-                console.log(response);
+        }).then((response) => {
+            this.props.addList(this.state.inputValue);
+            this.setState({
+                inputValue: ''
             })
-
-        this.props.addList(this.state.inputValue);
-        this.setState({
-            inputValue: ''
         })
     }
 
 
     componentDidMount() {
-        const _this = this;
         todoApi.get()
-            .then(function (response) {
-                _this.props.addInitData(response.data);
+            .then((response) => {
+                this.props.addInitData(response.data);
             }).catch(function (error) {
                 alert(error)
             })

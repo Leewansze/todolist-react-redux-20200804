@@ -9,7 +9,6 @@ function todoReducer(state = init, action) {
                 values: [...state.values, {content: action.value, status: false }]
             }
         case 'deleteList':
-            console.log("1")
             return {
                 values: state.values.filter((param) => { return param.id !== action.id })
             }
@@ -18,7 +17,7 @@ function todoReducer(state = init, action) {
                 values: state.values.map((item) => {
                     if(item.id === action.id){
                         // item.status = (!item.status)
-                        return [{...item}, { status: !item.status }]
+                        return {...item ,  status: !item.status }
                     }
                     return item;
                 })

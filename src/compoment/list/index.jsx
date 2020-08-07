@@ -9,18 +9,18 @@ class Listitem extends React.Component {
 
     handleDelete = () => {
         todoApi.delete(`/${this.props.item.id}`)
-            .then(function (response) {
-                console.log(response)
+            .then((response) => {
+                this.props.deleteList(this.props.item.id);
             });
-        this.props.deleteList(this.props.item.id);
+        
     }
 
     handleMark = () => {
         todoApi.put(`/${this.props.item.id}`, { status: !this.props.item.status })
             .then((response) => {
-                console.log(response);
+                this.props.toggleMark(this.props.item.id);
             })
-        this.props.toggleMark(this.props.item.id);
+        
     }
     render() {
         return (
