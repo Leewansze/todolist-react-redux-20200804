@@ -6,7 +6,7 @@ function todoReducer(state = init, action) {
     switch (action.type) {
         case 'addList':
             return {
-                values: [...state.values, {content: action.value, status: false }]
+                values: [...state.values, {id : action.payload.id, content: action.payload.value, status: false }]
             }
         case 'deleteList':
             return {

@@ -30,7 +30,7 @@ class InputTodolist extends React.Component {
             content: this.state.inputValue,
             status: false
         }).then((response) => {
-            this.props.addList(this.state.inputValue);
+            this.props.addList(response.data.id,this.state.inputValue);
             this.setState({
                 inputValue: ''
             })
@@ -100,7 +100,7 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => ({
-    addList: (value) => dispatch({ type: 'addList', value: value }),
+    addList: (id,value) => dispatch({ type: 'addList', payload: {id : id, value : value} }),
     deleteList: (id) => dispatch({ type: 'deleteList', id: id }),
     addInitData: (data) => dispatch({ type: 'addInitData', data: data }),
     toggleMark: (id) => dispatch({ type: 'toggleMark', id: id }),
